@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+<head>
+  <!-- charset & viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- seo -->
+  <meta name="author" content="Luca Polzone">
+  <meta name="description" content="Pokedex">
+  <meta name="keywords" content="esercizio, pokemon, pokedex">
+  <!-- title & favicon -->
+  <title>Pokedex</title>
+  <link rel="icon" href="favicon.ico">
+  <!-- Fontawesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- stile -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="pokedex-wrapper">
+    <header>
+      <div class="container text-center">
+        <h1>Pokedex</h1>
+      </div>
+    </header>
+
+    <main class="d-flex">
+      <!-- LEFT CONTAINER -->
+      <div id="left-container">
+        <form action="">
+          <input type="search" placeholder="Cerca un pokemon" name="pokemon-search" id="pokemon-search">
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button type="submit"><img src="./pokeball_icon.png" alt="">CATCH!</button>
+        </form>
+
+        <div class="pokemon-picture-wrapper d-flex">
+          <img src="./pikachu.jpg" class="pokemon-picture" alt="pokemon-picture">
+        </div>
+
+        <ul class="detail-list">
+          <li><strong>Name: </strong>Pikachu</li>
+          <li><strong>Type: </strong>electric</li>
+          <li><strong>Height: </strong>4''</li>
+          <li><strong>Weight: </strong>60 lbs</li>
+          <br />
+          <li><strong>Stats</strong></li>
+          <ul id="stats">
+            <li>
+              <small>hp</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 40%;"></div>
+              </div>
+            </li>
+            <li>
+              <small>attack</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 60%;"></div>
+              </div>
+            </li>
+            <li>
+              <small>defense</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 70%;"></div>
+              </div>
+            </li>
+            <li>
+              <small>special-attack</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 80%;"></div>
+              </div>
+            </li>
+            <li>
+              <small>special-defense</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 30%;"></div>
+              </div>
+            </li>
+            <li>
+              <small>speed</small>
+              <div class="wrapper-stat">
+                <div class="stat" style="width: 90%;"></div>
+              </div>
+            </li>
+          </ul>
+        </ul>
+
+      </div>
+
+      <!-- RIGHT CONTAINER -->
+      <div id="right-container">
+        <div class="wrapper-pokemon-list">
+          <h2>Pokemon catturati</h2>
+          <ul>
+            <li>
+              <small>Pikachu</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Charmender</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Bulbasaur</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Squirtle</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Ratata</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Spearow</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+            <li>
+              <small>Snake</small>
+              <div class="pokemon-controllers">
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </main>
+  </div>
+      
+</body>
+</html>

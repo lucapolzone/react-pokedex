@@ -1,0 +1,145 @@
+/* reset */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(203, 197, 216);
+}
+
+ul li {
+  list-style-type: none;
+}
+
+small {
+  font-size: 0.9rem;
+}
+
+/* utils */
+
+:root {
+  --small-size: 1rem;
+  --medium-size: 2rem;
+  --large-size: 3rem;
+  --xlarge-size: 4rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+/* styles */
+
+h1 {
+  margin-bottom: var(--medium-size);
+}
+
+
+header {
+  padding: var(--medium-size);
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1080px;
+}
+
+
+main {
+  justify-content: center;
+}
+
+#pokedex-wrapper {
+  padding: var(--small-size);
+  margin: var(--small-size);
+}
+
+#left-container, #right-container {
+  padding: var(--medium-size);
+  background-color: rgb(170, 0, 0);
+  border: 6px solid salmon;
+  width: 550px;
+  padding-bottom: var(--medium-size);
+}
+
+
+.pokemon-picture-wrapper {
+  margin: var(--medium-size) 0 ;
+  justify-content: center;
+  border: 5px solid salmon;
+  background-color: rgb(184, 184, 184);
+}
+
+.pokemon-picture {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+}
+
+#left-container {
+  border-right: 3px solid salmon ;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+#right-container {
+  border-left: 3px solid salmon ;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#left-container button img {
+  width: 20px;
+}
+
+.detail-list, .wrapper-pokemon-list {
+  padding: var(--small-size);
+  background-color: white;
+}
+
+#stats li, .wrapper-pokemon-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper-pokemon-list ul {
+  margin-top: var(--medium-size);
+}
+
+.wrapper-pokemon-list li {
+  margin: var(--small-size) 0;
+}
+
+.wrapper-stat {
+  border: 1px solid blue; 
+  width: 250px; 
+  height: 12px;
+}
+
+.stat {
+  background-color: blue; 
+  padding: 5px; height: 100%;
+}
+
+
+.fa-solid {
+  margin: 0 3px;
+}
+
+.fa-eye {
+  color: blue;
+}
+
+.fa-circle-xmark {
+  color: red;
+}
