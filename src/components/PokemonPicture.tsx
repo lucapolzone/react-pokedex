@@ -9,7 +9,7 @@ const PokemonPictureWrapper = styled.div`
   background-color: rgb(184, 184, 184);
 `;
 
-const PokemonImg = styled.img`
+const PokemonSprite = styled.img`
   display: block;
   width: 100%;
   max-width: 200px;
@@ -18,7 +18,7 @@ const PokemonImg = styled.img`
 const PokemonPicture = () => {
   return (
     <PokemonPictureWrapper>
-      <PokemonImg src={Pikachu} />
+      <PokemonSprite src={Pikachu} />
     </PokemonPictureWrapper>
   );
 };
