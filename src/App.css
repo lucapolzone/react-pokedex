@@ -1,0 +1,37 @@
+/* RESET */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(203, 197, 216);
+}
+
+ul li {
+  list-style-type: none;
+}
+
+small {
+  font-size: 0.9rem;
+}
+
+
+/* UTILS */
+
+:root {
+  --small-size: 1rem;
+  --medium-size: 2rem;
+  --large-size: 3rem;
+  --xlarge-size: 4rem;
+}
+
+
+/* UTILS */
+
+h1 {
+  text-align: center;
+}

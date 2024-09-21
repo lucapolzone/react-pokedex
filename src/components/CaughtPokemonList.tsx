@@ -1,47 +1,23 @@
 import styled from 'styled-components';
 
-// Definizione degli Styled Components
-const ListContainer = styled.div`
+const List = styled.div`
   padding: 2rem;
   background-color: white;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  max-width: 300px;
 `;
 
-const ListTitle = styled.h2`
-  font-size: 1.5rem;
-  color: darkred;
-  margin-bottom: 1.5rem;
-  text-align: center;
+const Ul = styled.ul`
+  margin-top: var(--medium-size);
 `;
 
-const PokemonList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const PokemonItem = styled.li`
+const Li = styled.li`
+  margin: var(--small-size) 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
-  
-  &:last-child {
-    border-bottom: none;
-  }
 `;
 
-const PokemonName = styled.small`
-  font-size: 1rem;
-  color: #333;
-`;
+const PokemonName = styled.small``;
 
 const Controllers = styled.div`
-  display: flex;
-  align-items: center;
-
   .fa-eye {
     color: blue;
     margin-right: 8px;
@@ -57,33 +33,60 @@ const Controllers = styled.div`
 // Componente statico CaughtPokemonList
 const CaughtPokemonList = () => {
   return (
-    <ListContainer>
-      <ListTitle>Pokemon catturati</ListTitle>
-      <PokemonList>
-        <PokemonItem>
+    <List>
+      <h2>Pokemon catturati</h2>
+      <Ul>
+        <Li>
           <PokemonName>Pikachu</PokemonName>
           <Controllers>
             <i className="fa-solid fa-eye"></i>
             <i className="fa-solid fa-circle-xmark"></i>
           </Controllers>
-        </PokemonItem>
-        <PokemonItem>
+        </Li>
+        <Li>
           <PokemonName>Charmander</PokemonName>
           <Controllers>
             <i className="fa-solid fa-eye"></i>
             <i className="fa-solid fa-circle-xmark"></i>
           </Controllers>
-        </PokemonItem>
-        <PokemonItem>
+        </Li>
+        <Li>
           <PokemonName>Bulbasaur</PokemonName>
           <Controllers>
             <i className="fa-solid fa-eye"></i>
             <i className="fa-solid fa-circle-xmark"></i>
           </Controllers>
-        </PokemonItem>
-        {/* Aggiungi qui altri Pokémon statici se desideri */}
-      </PokemonList>
-    </ListContainer>
+        </Li>
+        <Li>
+          <PokemonName>Squirtle</PokemonName>
+          <Controllers>
+            <i className="fa-solid fa-eye"></i>
+            <i className="fa-solid fa-circle-xmark"></i>
+          </Controllers>
+        </Li>
+        <Li>
+          <PokemonName>Rattata</PokemonName>
+          <Controllers>
+            <i className="fa-solid fa-eye"></i>
+            <i className="fa-solid fa-circle-xmark"></i>
+          </Controllers>
+        </Li>
+        <Li>
+          <PokemonName>Spearow</PokemonName>
+          <Controllers>
+            <i className="fa-solid fa-eye"></i>
+            <i className="fa-solid fa-circle-xmark"></i>
+          </Controllers>
+        </Li>
+        <Li>
+          <PokemonName>Snake</PokemonName>
+          <Controllers>
+            <i className="fa-solid fa-eye"></i>
+            <i className="fa-solid fa-circle-xmark"></i>
+          </Controllers>
+        </Li>
+      </Ul>
+    </List>
   );
 };
 
