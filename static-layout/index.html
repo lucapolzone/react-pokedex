@@ -27,70 +27,81 @@
     <main class="d-flex">
       <!-- LEFT CONTAINER -->
       <div id="left-container">
-        <form action="">
-          <input type="search" placeholder="Cerca un pokemon" name="pokemon-search" id="pokemon-search">
-          <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-          <button type="submit"><img src="./pokeball_icon.png" alt="">CATCH!</button>
-        </form>
-
-        <div class="pokemon-picture-wrapper d-flex">
-          <img src="./pikachu.jpg" class="pokemon-picture" alt="pokemon-picture">
+        <div class="component">
+          <form action="">
+            <input type="search" placeholder="Cerca un pokemon" name="pokemon-search" id="pokemon-search">
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button type="submit"><img src="./pokeball_icon.png" class="pokeball-icon" alt="">CATCH!</button>
+          </form>
         </div>
 
-        <ul class="detail-list">
-          <li><strong>Name: </strong>Pikachu</li>
-          <li><strong>Type: </strong>electric</li>
-          <li><strong>Height: </strong>4''</li>
-          <li><strong>Weight: </strong>60 lbs</li>
-          <br />
-          <li><strong>Stats</strong></li>
-          <ul id="stats">
-            <li>
-              <small>hp</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 40%;"></div>
-              </div>
-            </li>
-            <li>
-              <small>attack</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 60%;"></div>
-              </div>
-            </li>
-            <li>
-              <small>defense</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 70%;"></div>
-              </div>
-            </li>
-            <li>
-              <small>special-attack</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 80%;"></div>
-              </div>
-            </li>
-            <li>
-              <small>special-defense</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 30%;"></div>
-              </div>
-            </li>
-            <li>
-              <small>speed</small>
-              <div class="wrapper-stat">
-                <div class="stat" style="width: 90%;"></div>
-              </div>
-            </li>
+        <div class="component">
+          <div class="pokemon-picture-wrapper d-flex">
+            <img src="./pikachu.jpg" class="pokemon-picture" alt="pokemon-picture">
+          </div>
+        </div>
+
+
+        <div class="component">
+          <ul class="detail-list">
+            <li><strong>Name: </strong>Pikachu</li>
+            <li><strong>Type: </strong>electric</li>
+            <li><strong>Height: </strong>4''</li>
+            <li><strong>Weight: </strong>60 lbs</li>
+            <br />
+            <li><strong>Stats</strong></li>
+
+            <div class="component">
+              <ul id="stats">
+                <li>
+                  <small>hp</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 40%;"></div>
+                  </div>
+                </li>
+                <li>
+                  <small>attack</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 60%;"></div>
+                  </div>
+                </li>
+                <li>
+                  <small>defense</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 70%;"></div>
+                  </div>
+                </li>
+                <li>
+                  <small>special-attack</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 80%;"></div>
+                  </div>
+                </li>
+                <li>
+                  <small>special-defense</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 30%;"></div>
+                  </div>
+                </li>
+                <li>
+                  <small>speed</small>
+                  <div class="wrapper-stat">
+                    <div class="stat" style="width: 90%;"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </ul>
-        </ul>
+        </div>
 
       </div>
 
       <!-- RIGHT CONTAINER -->
       <div id="right-container">
-        <div class="wrapper-pokemon-list">
+        <div class="component">
+          <div class="wrapper-pokemon-list">
           <h2>Pokemon catturati</h2>
           <ul>
             <li>
@@ -143,6 +154,7 @@
               </div>
             </li>
           </ul>
+          </div>
         </div>
       </div>
 

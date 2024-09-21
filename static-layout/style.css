@@ -1,4 +1,4 @@
-/* reset */
+/* RESET */
 
 *{
   margin: 0;
@@ -19,13 +19,19 @@ small {
   font-size: 0.9rem;
 }
 
-/* utils */
+/* UTILS */
 
 :root {
   --small-size: 1rem;
   --medium-size: 2rem;
   --large-size: 3rem;
   --xlarge-size: 4rem;
+}
+
+.component {
+  border: 1px solid rgb(0, 255, 0);
+  padding: 2px;
+  margin: 1rem 0;
 }
 
 .d-flex {
@@ -37,12 +43,11 @@ small {
 }
 
 
-/* styles */
+/* STYLES */
 
 h1 {
   margin-bottom: var(--medium-size);
 }
-
 
 header {
   padding: var(--medium-size);
@@ -53,7 +58,6 @@ header {
   width: 100%;
   max-width: 1080px;
 }
-
 
 main {
   justify-content: center;
@@ -72,20 +76,6 @@ main {
   padding-bottom: var(--medium-size);
 }
 
-
-.pokemon-picture-wrapper {
-  margin: var(--medium-size) 0 ;
-  justify-content: center;
-  border: 5px solid salmon;
-  background-color: rgb(184, 184, 184);
-}
-
-.pokemon-picture {
-  display: block;
-  width: 100%;
-  max-width: 200px;
-}
-
 #left-container {
   border-right: 3px solid salmon ;
   border-top-left-radius: 20px;
@@ -98,8 +88,9 @@ main {
   border-bottom-right-radius: 20px;
 }
 
-#left-container button img {
-  width: 20px;
+#stats li, .wrapper-pokemon-list li {
+  display: flex;
+  justify-content: space-between;
 }
 
 .detail-list, .wrapper-pokemon-list {
@@ -107,18 +98,22 @@ main {
   background-color: white;
 }
 
-#stats li, .wrapper-pokemon-list li {
-  display: flex;
-  justify-content: space-between;
+
+/* LEFT CONTAINER */
+
+.pokemon-picture-wrapper {
+  margin: var(--medium-size) 0;
+  justify-content: center;
+  border: 5px solid salmon;
+  background-color: rgb(184, 184, 184);
 }
 
-.wrapper-pokemon-list ul {
-  margin-top: var(--medium-size);
+.pokemon-picture {
+  display: block;
+  width: 100%;
+  max-width: 200px;
 }
 
-.wrapper-pokemon-list li {
-  margin: var(--small-size) 0;
-}
 
 .wrapper-stat {
   border: 1px solid blue; 
@@ -132,8 +127,27 @@ main {
 }
 
 
+/* RIGHT CONTAINER */
+
+
+.wrapper-pokemon-list ul {
+  margin-top: var(--medium-size);
+}
+
+.wrapper-pokemon-list li {
+  margin: var(--small-size) 0;
+}
+
+
+/* ICONS */
+
 .fa-solid {
   margin: 0 3px;
+  font-size: 1.2rem;
+}
+
+.pokeball-icon {
+  width: 20px;
 }
 
 .fa-eye {
