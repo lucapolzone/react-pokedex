@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+import { useSelector, useDispatch } from 'react-redux'; //hooks di redux con react. useSelector: accede allo stato del Redux store. useDispatch: fornisce una funzione che invia actions allo store.
+import { RootState } from '../redux/store';
+import { deletePokemon } from '../redux/pokemonSlice';
+// import { pokemonSlice } from '../redux/pokemonSlice';
+
+
 const List = styled.div`
   padding: 2rem;
   background-color: white;
@@ -32,59 +38,24 @@ const Controllers = styled.div`
 
 // Componente statico CaughtPokemonList
 const CaughtPokemonList = () => {
+  const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //laa funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
+  const dispatch = useDispatch();
+
+  // console.log("Redux actions:",pokemonSlice.actions);
+
   return (
     <List>
       <h2>Pokemon catturati</h2>
       <Ul>
-        <Li>
-          <PokemonName>Pikachu</PokemonName>
+      {caughtPokemons.map((pokemon) => (
+        <Li key={pokemon}>
+          <PokemonName>{pokemon}</PokemonName>
           <Controllers>
             <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
+            <i className="fa-solid fa-circle-xmark" onClick={() => dispatch(deletePokemon(pokemon))}></i>
           </Controllers>
         </Li>
-        <Li>
-          <PokemonName>Charmander</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
-        <Li>
-          <PokemonName>Bulbasaur</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
-        <Li>
-          <PokemonName>Squirtle</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
-        <Li>
-          <PokemonName>Rattata</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
-        <Li>
-          <PokemonName>Spearow</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
-        <Li>
-          <PokemonName>Snake</PokemonName>
-          <Controllers>
-            <i className="fa-solid fa-eye"></i>
-            <i className="fa-solid fa-circle-xmark"></i>
-          </Controllers>
-        </Li>
+      ))}
       </Ul>
     </List>
   );
