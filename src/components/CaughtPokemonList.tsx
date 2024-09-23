@@ -39,7 +39,7 @@ const Controllers = styled.div`
 // Componente statico CaughtPokemonList
 const CaughtPokemonList = () => {
   const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //laa funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
-  console.log(caughtPokemons);
+  // console.log(caughtPokemons);
   
   const dispatch = useDispatch();
 
