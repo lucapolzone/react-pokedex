@@ -3,12 +3,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // interface: Una struttura in TypeScript per l'oggetto. Specifica le proprietà e i loro tipi.
-interface PokemonState {
+export interface PokemonState {
   caughtPokemons: string[]; // Array di nomi di Pokémon catturati
 }
 
 const initialState: PokemonState = { // sintassi typescript: costante initialState, tipo PokemonState
-  caughtPokemons: ['Pikachu', 'Charmander', 'Bulbasaur'], // Pokémon iniziali catturati
+  caughtPokemons: ['Pikachu', 'Charmander', 'Bulbasaur', 'Spearow', 'Rattata', 'Squirtle', 'Ekans', ], // Pokémon iniziali catturati
 };
 
 const pokemonSlice = createSlice({
@@ -41,4 +41,3 @@ export const { catchPokemon, deletePokemon } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
 
-// export { pokemonSlice };
