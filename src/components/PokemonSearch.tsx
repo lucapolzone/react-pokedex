@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
 
 
 const PokemonSearch = ({ setPokemonData }: { setPokemonData: (data: any) => void }) => {
   const [pokemonName, setPokemonName] = useState('');
   const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
+  const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
 
   const handleSearch = async () => {
     if (pokemonName.trim() === '') return;
@@ -23,21 +24,29 @@ const PokemonSearch = ({ setPokemonData }: { setPokemonData: (data: any) => void
     }
   };
 
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPokemonName(value);
-    
-    // Ottiengo i suggerimenti solo se c'è almeno un carattere
-    if (value.length > 0) {
-      try {
-        const results = await fetchPokemonSuggestions(value);
-        setSuggestions(results.slice(0, 3)); // Limita i suggerimenti a 3
-      } catch (error) {
-        console.error('Errore nel fetching dei suggerimenti:', error);
-      }
-    } else {
-      setSuggestions([]); // Se non c'è input, resetta i suggerimenti
+
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout); // Pulisci il timeout precedente
     }
+
+    // Imposta un nuovo timeout
+    const newTimeout = setTimeout(async () => {
+      if (value.length > 0) {
+        try {
+          const results = await fetchPokemonSuggestions(value);
+          setSuggestions(results.slice(0, 3));
+        } catch (error) {
+          console.error('Errore nel fetching dei suggerimenti:', error);
+        }
+      } else {
+        setSuggestions([]);
+      }
+    }, 300); // Aspetta 300 ms
+
+    setDebounceTimeout(newTimeout); // Salva il nuovo timeout
   };
 
   // Funzione per selezionare un suggerimento
@@ -46,6 +55,14 @@ const PokemonSearch = ({ setPokemonData }: { setPokemonData: (data: any) => void
     setSuggestions([]); // Nascondi i suggerimenti dopo la selezione
   };
 
+  useEffect(() => {
+    // Cleanup al momento della dismounting
+    return () => {
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
+  }, [debounceTimeout]);
 
   return (
     <>
