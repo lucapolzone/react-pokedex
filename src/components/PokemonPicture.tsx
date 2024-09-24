@@ -6,22 +6,28 @@ const PokemonPictureWrapper = styled.div`
   justify-content: center;
   border: 5px solid salmon;
   background-color: rgb(184, 184, 184);
+  width: 100%;
+  height: 200px;
 `;
 
 const PokemonSprite = styled.img`
   display: block;
-  width: 100%;
   max-width: 200px;
 `;
 
 interface PokemonPictureProps {
-  image: string; // Definisci il tipo di prop 'image'
+  image: string | null ; // Definisci il tipo di prop 'image'
 }
 
 const PokemonPicture: React.FC<PokemonPictureProps> = ({ image }) => {
   return (
     <PokemonPictureWrapper>
-      <PokemonSprite src={image} alt="pokemon" />
+      { image ? (
+          <PokemonSprite src={image} alt="pokemon" />
+        ) : (
+          <p>&nbsp;</p>
+        ) 
+      }
     </PokemonPictureWrapper>
   );
 };
