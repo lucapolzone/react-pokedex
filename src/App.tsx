@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import CaughtPokemonList from './components/CaughtPokemonList';
 import PokemonSearch from './components/PokemonSearch';
@@ -38,17 +39,17 @@ const RightContainer = styled(BaseContainer)`
 `;
 
 function App() {
+  const [pokemonData, setPokemonData] = useState<any>(null); // Stato per memorizzare i dati del Pokémon
+
   return (
     <>
-      {/* Qui andranno i miei componenti  */}
       <Wrapper>
         <h1>Pokedex</h1>
         <Main>
           <LeftContainer>
-            <PokemonSearch />
-            <PokemonPicture />
-            <PokemonDetails>
-            </PokemonDetails>
+            <PokemonSearch setPokemonData={setPokemonData} /> {/* Passa il setter */}
+            {pokemonData && <PokemonPicture image={pokemonData.sprites.front_default} />} {/* Usa pokemonData */}
+            {pokemonData && <PokemonDetails pokemon={pokemonData} />} {/* Usa pokemonData */}
           </LeftContainer>
           <RightContainer>
             <CaughtPokemonList />

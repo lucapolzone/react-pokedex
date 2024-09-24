@@ -27,4 +27,3 @@ const PokemonPicture: React.FC<PokemonPictureProps> = ({ image }) => {
 };
 
 export default PokemonPicture;
-

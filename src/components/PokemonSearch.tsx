@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import fetchPokemon from '../api/fetchPokemon';
 
-const PokemonSearch = () => {
-  const [pokemonName, setPokemonName] = useState(''); // Stato per gestire l'input dell'utente
+const PokemonSearch = ({ setPokemonData }: { setPokemonData: (data: any) => void }) => {
+  const [pokemonName, setPokemonName] = useState('');
 
   const handleSearch = async () => {
-    if (pokemonName.trim() === '') return; // Evita chiamate se l'input è vuoto
+    if (pokemonName.trim() === '') return;
     try {
-      const result = await fetchPokemon(pokemonName); // Chiama l'API usando il nome del Pokémon
-      console.log(result); 
+      const result = await fetchPokemon(pokemonName);
+      setPokemonData(result); // Passa i dati a App.tsx
     } catch (error) {
       console.error('Errore nella ricerca del Pokémon:', error);
     }
@@ -19,12 +19,10 @@ const PokemonSearch = () => {
       <input
         type="search"
         placeholder="Cerca un pokemon"
-        name="pokemon-search"
-        id="pokemon-search"
-        value={pokemonName} // Collega lo stato dell'input all'input dell'utente
-        onChange={(e) => setPokemonName(e.target.value)} // Aggiorna lo stato con l'input dell'utente
+        value={pokemonName}
+        onChange={(e) => setPokemonName(e.target.value)}
       />
-      <button type="button" onClick={handleSearch}> {/* Chiama la funzione di ricerca quando si preme il pulsante */}
+      <button type="button" onClick={handleSearch}>
         <i className="fa-solid fa-magnifying-glass"></i>
         Cerca
       </button>
