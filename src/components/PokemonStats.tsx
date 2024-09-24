@@ -8,7 +8,8 @@ const StatsLi = styled.li`
 `;
 
 const WrapperStat = styled.div`
-  border: 1px solid blue; 
+  border: 1px solid blue;
+  background-color: white; 
   width: 250px; 
   height: 12px;
 `;

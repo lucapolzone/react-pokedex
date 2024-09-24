@@ -50,7 +50,7 @@ function App() {
             <PokemonSearch setPokemonData={setPokemonData} /> {/* Passa il setter */}
             {/* PokemonPictureWrapper statico, immagine dinamica */}
             <PokemonPicture image={pokemonData ? pokemonData.sprites.front_default : null} />
-            {pokemonData && <PokemonDetails pokemon={pokemonData} />} {/* Usa pokemonData */}
+            <PokemonDetails pokemon={pokemonData} /> {/* Usa pokemonData */}
           </LeftContainer>
           <RightContainer>
             <CaughtPokemonList />

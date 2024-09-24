@@ -5,7 +5,7 @@ const PokemonPictureWrapper = styled.div`
   display: flex;
   justify-content: center;
   border: 5px solid salmon;
-  background-color: rgb(184, 184, 184);
+  background-color: #90f9ef;
   width: 100%;
   height: 200px;
 `;
