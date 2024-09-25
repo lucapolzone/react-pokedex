@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import PokemonStats from './PokemonStats';
 
 const DetailList = styled.ul`
@@ -8,8 +10,9 @@ const DetailList = styled.ul`
 `;
 
 
-// Definisci le props per ricevere i dati del Pokémon
-const PokemonDetails = ({ pokemon }: { pokemon: any }) => {
+const PokemonDetails: React.FC = () => {
+  const pokemon = useSelector((state: RootState) => state.pokemon.currentPokemon);
+
   return (
     <DetailList>
       {pokemon && pokemon.name ? (

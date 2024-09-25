@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import CaughtPokemonList from './components/CaughtPokemonList';
 import PokemonSearch from './components/PokemonSearch';
@@ -39,18 +38,15 @@ const RightContainer = styled(BaseContainer)`
 `;
 
 function App() {
-  const [pokemonData, setPokemonData] = useState<any>(null); // Stato per memorizzare i dati del Pokémon
-
   return (
     <>
       <Wrapper>
         <h1>Pokedex</h1>
         <Main>
           <LeftContainer>
-            <PokemonSearch setPokemonData={setPokemonData} /> {/* Passa il setter */}
-            {/* PokemonPictureWrapper statico, immagine dinamica */}
-            <PokemonPicture image={pokemonData ? pokemonData.sprites.front_default : null} />
-            <PokemonDetails pokemon={pokemonData} /> {/* Usa pokemonData */}
+            <PokemonSearch />
+            <PokemonPicture />
+            <PokemonDetails />
           </LeftContainer>
           <RightContainer>
             <CaughtPokemonList />

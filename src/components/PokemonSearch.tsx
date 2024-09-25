@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
+import { setCurrentPokemon } from '../redux/pokemonSlice'; // Importa l'azione
 
-
-const PokemonSearch = ({ setPokemonData }: { setPokemonData: (data: any) => void }) => {
+const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
   const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
+  const dispatch = useDispatch(); // hook di redux
 
   const handleSearch = async () => {
     if (pokemonName.trim() === '') return;
     try {
       const result = await fetchPokemon(pokemonName);
-      setPokemonData(result); // Passa i dati a App.tsx
+      dispatch(setCurrentPokemon(result)); // salva i dati nel redux store
     } catch (error) {
       console.error('Errore nella ricerca del Pokémon:', error);
     }
