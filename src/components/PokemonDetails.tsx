@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import PokemonStats from './PokemonStats';
 
 const DetailList = styled.ul`
@@ -9,10 +7,12 @@ const DetailList = styled.ul`
   min-height: 242px;
 `;
 
+// interfaccia corretta per la prop 'pokemon'
+interface PokemonDetailsProps {
+  pokemon: any; // da tipizzare meglio
+}
 
-const PokemonDetails: React.FC = () => {
-  const pokemon = useSelector((state: RootState) => state.pokemon.currentPokemon);
-
+const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon }) => {
   return (
     <DetailList>
       {pokemon && pokemon.name ? (
@@ -31,5 +31,6 @@ const PokemonDetails: React.FC = () => {
     </DetailList>
   );
 };
+
 
 export default PokemonDetails;

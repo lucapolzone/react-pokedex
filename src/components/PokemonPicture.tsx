@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store'; // importa il RootState
 
 const PokemonPictureWrapper = styled.div`
   margin: var(--medium-size) 0;
@@ -17,16 +15,21 @@ const PokemonSprite = styled.img`
   max-width: 200px;
 `;
 
-const PokemonPicture: React.FC = () => {
-  const pokemon = useSelector((state: RootState) => state.pokemon.currentPokemon); // seleziona il pokemon dal Redux store
+// interfaccia corretta per la prop image
+interface PokemonPictureProps {
+  image: string | null; // tipo della prop 'image'
+}
+
+const PokemonPicture: React.FC<PokemonPictureProps> = ({ image }) => {
 
   return (
     <PokemonPictureWrapper>
-      {pokemon ? (
-        <PokemonSprite src={pokemon.sprites.front_default} alt="pokemon" />
-      ) : (
-        <p>&nbsp;</p>
-      )}
+      { image ? (
+          <PokemonSprite src={image} alt="pokemon" />
+        ) : (
+          <p>&nbsp;</p>
+        ) 
+      }
     </PokemonPictureWrapper>
   );
 };

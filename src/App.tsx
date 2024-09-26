@@ -3,6 +3,8 @@ import CaughtPokemonList from './components/CaughtPokemonList';
 import PokemonSearch from './components/PokemonSearch';
 import PokemonPicture from './components/PokemonPicture';
 import PokemonDetails from './components/PokemonDetails';
+import { useSelector } from 'react-redux'; // per accedere allo stato di redux
+import { RootState } from './redux/store'; // per ottenere il tipo dello stato globale
 
 import './App.css';
 
@@ -37,6 +39,22 @@ const RightContainer = styled(BaseContainer)`
   border-bottom-right-radius: 20px;
 `;
 
+
+// gestisce entrambi i componenti che dipendono dallo stesso stato
+const ReduxSyncWrapper = () => {
+  // Uso di useSelector per estrarre lo stato attuale del Pokémon da Redux
+  const pokemon = useSelector((state: RootState) => state.pokemon.currentPokemon);
+
+  return (
+    <>
+      {/* passa lo stato a entrambi i componenti */}
+      <PokemonPicture image={pokemon ? pokemon.sprites.front_default : null} />
+      <PokemonDetails pokemon={pokemon} />
+    </>
+  );
+};
+
+
 function App() {
   return (
     <>
@@ -45,8 +63,7 @@ function App() {
         <Main>
           <LeftContainer>
             <PokemonSearch />
-            <PokemonPicture />
-            <PokemonDetails />
+            <ReduxSyncWrapper />
           </LeftContainer>
           <RightContainer>
             <CaughtPokemonList />
