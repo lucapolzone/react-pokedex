@@ -7,8 +7,8 @@ import styled from 'styled-components'; // Importa styled-components
 
 
 const SuggestionList = styled.ul`
-  background-color: rgba(255, 255, 255, 0.8); /* Colore di sfondo semitrasparente */
-  position: absolute; /* Posizione assoluta per sovrapporre l'input */
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
   z-index: 1;
   width: 100%;
   max-width: 199px;
@@ -22,9 +22,9 @@ const InputSearch = styled.input`
 const SuggestionItem = styled.li`
   padding: 2px 0;
   padding-left: 0.5rem;
-  cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  cursor: pointer; 
   &:hover {
-    background-color: rgba(255, 0, 0, 0.1); /* Colore di sfondo al passaggio del mouse */
+    background-color: rgba(255, 0, 0, 0.1); 
   }
 `;
 
