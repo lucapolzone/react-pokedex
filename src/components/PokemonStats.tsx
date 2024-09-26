@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// wrapper per il contenitore delle statistiche
 const Stats = styled.ul``;
 
 const StatsLi = styled.li`
@@ -14,58 +15,31 @@ const WrapperStat = styled.div`
   height: 12px;
 `;
 
-const Stat = styled.div`
+const Stat = styled.div<{ width: number }>`
   background-color: blue; 
-  padding: 5px; height: 100%;
+  padding: 5px;
+  width: ${(props) => props.width}%; 
+  height: 100%;
 `;
 
-const Stat1 = styled(Stat)`width: 40%;`;
-const Stat2 = styled(Stat)`width: 60%;`;
-const Stat3 = styled(Stat)`width: 70%;`;
-const Stat4 = styled(Stat)`width: 80%;`;
-const Stat5 = styled(Stat)`width: 30%;`;
-const Stat6 = styled(Stat)`width: 90%;`;
+// Interfaccia per le props
+interface PokemonStatsProps {
+  stats: { name: string; base_stat: number }[]; // Riceve un array di oggetti con nome e valore base_stat
+}
 
+const MAX_STAT_VALUE = 255; // Valore massimo per una statistica
 
-const PokemonStats = () => {
+const PokemonStats: React.FC<PokemonStatsProps> = ({ stats }) => {
   return (
     <Stats>
-      <StatsLi>
-        <small>hp</small>
-        <WrapperStat>
-          <Stat1 />
-        </WrapperStat>
-      </StatsLi>
-      <StatsLi>
-        <small>attack</small>
-        <WrapperStat>
-          <Stat2 />
-        </WrapperStat>
-      </StatsLi>
-      <StatsLi>
-        <small>defense</small>
-        <WrapperStat>
-          <Stat3 />
-        </WrapperStat>
-      </StatsLi>
-      <StatsLi>
-        <small>special-attack</small>
-        <WrapperStat>
-          <Stat4 />
-        </WrapperStat>
-      </StatsLi>
-      <StatsLi>
-        <small>special-defense</small>
-        <WrapperStat>
-          <Stat5 />
-        </WrapperStat>
-      </StatsLi>
-      <StatsLi>
-        <small>speed</small>
-        <WrapperStat>
-          <Stat6 />
-        </WrapperStat>
-      </StatsLi>
+      {stats.map((stat) => (
+        <StatsLi key={stat.name}>
+          <small>{stat.name}</small>
+          <WrapperStat>
+            <Stat width={(stat.base_stat / MAX_STAT_VALUE) * 125} /> {/* Calcola la larghezza in base alla percentuale */}
+          </WrapperStat>
+        </StatsLi>
+      ))}
     </Stats>
   );
 };

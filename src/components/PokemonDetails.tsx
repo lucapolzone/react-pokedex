@@ -23,7 +23,11 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon }) => {
           <li><strong>Weight: </strong>{pokemon.weight}</li>
           <br />
           <li><strong>Stats</strong></li>
-          <PokemonStats />
+          {/* Passo le statistiche al componente PokemonStats */}
+          <PokemonStats stats={pokemon.stats.map((stat: any) => ({
+            name: stat.stat.name,
+            base_stat: stat.base_stat
+          }))} />
         </>
       ) : (
         <p>&nbsp;</p>

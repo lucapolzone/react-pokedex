@@ -52,7 +52,7 @@ const PokemonSearch = () => {
       if (value.length > 0) {
         // Controlla se il suggerimento esiste già nella cache
         if (suggestionCache[value]) {
-          console.log("Suggerimenti trovati in cache:", suggestionCache[value]);
+          console.table("Suggerimenti trovati in cache:", suggestionCache[value]);
           setSuggestions(suggestionCache[value]); // Usa i suggerimenti dalla cache
         } else {
           try {
