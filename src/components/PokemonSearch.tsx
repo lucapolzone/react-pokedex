@@ -2,13 +2,25 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
 import { setCurrentPokemon, resetPokemon } from '../redux/pokemonSlice'; // Importa l'azione
+import { loadSuggestionCache, saveSuggestionCache } from '../redux/localStorage'; // Importa le funzioni del localStorage
 
 const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
   const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
+  
+  // suggestionCache è l'oggetto che salva le ricerche in cache
+  const [suggestionCache, setSuggestionCache] = useState<{ [key: string]: any[] }>({}); 
+  
   const dispatch = useDispatch(); // hook di redux
 
+  useEffect(() => {
+    // al montaggio del componente carica la cache dei suggerimenti dal local storage
+    const cachedSuggestions = loadSuggestionCache();
+    setSuggestionCache(cachedSuggestions);
+  }, []);
+
+  // Funzione per effettuare la ricerca di un Pokémon
   const handleSearch = async () => {
     if (pokemonName.trim() === '') return;
     try {
@@ -26,27 +38,43 @@ const PokemonSearch = () => {
     }
   };
 
+  // Funzione per gestire i cambiamenti dell'input e il debounce
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const value = event.target.value.trim();
     setPokemonName(value);
 
     if (debounceTimeout) {
       clearTimeout(debounceTimeout); // Pulisci il timeout precedente
     }
 
-    // Imposta un nuovo timeout
+    // Imposta un nuovo timeout per il debounce
     const newTimeout = setTimeout(async () => {
       if (value.length > 0) {
-        try {
-          const results = await fetchPokemonSuggestions(value);
-          setSuggestions(results.slice(0, 3));
-        } catch (error) {
-          console.error('Errore nel fetching dei suggerimenti:', error);
+        // Controlla se il suggerimento esiste già nella cache
+        if (suggestionCache[value]) {
+          console.log("Suggerimenti trovati in cache:", suggestionCache[value]);
+          setSuggestions(suggestionCache[value]); // Usa i suggerimenti dalla cache
+        } else {
+          try {
+            const results = await fetchPokemonSuggestions(value);
+            const newSuggestions = results.slice(0, 3); // Mostra solo i primi 3 suggerimenti
+
+            // Aggiorna lo stato e la cache
+            setSuggestionCache((prevCache) => {
+              const updatedCache = { ...prevCache, [value]: newSuggestions };
+              saveSuggestionCache(updatedCache); // Salva la cache nel local storage
+              return updatedCache;
+            });
+
+            setSuggestions(newSuggestions); // Aggiorna i suggerimenti visualizzati
+          } catch (error) {
+            console.error('Errore nel fetching dei suggerimenti:', error);
+          }
         }
       } else {
-        setSuggestions([]);
+        setSuggestions([]); // Se l'input è vuoto, non mostra suggerimenti
       }
-    }, 300); // Aspetta 300 ms
+    }, 300); // Timeout di 300 ms prima di chiamare l'API
 
     setDebounceTimeout(newTimeout); // Salva il nuovo timeout
   };
@@ -57,6 +85,7 @@ const PokemonSearch = () => {
     setSuggestions([]); // Nascondi i suggerimenti dopo la selezione
   };
 
+  // Funzione per resettare lo stato
   const handleReset = () => {
     setPokemonName(''); // svuota l'input search
     setSuggestions([]); // svuota i suggerimenti

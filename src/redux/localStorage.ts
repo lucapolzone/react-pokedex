@@ -21,3 +21,27 @@ export const saveState = (state: any) => {
     console.error("Impossibile salvare lo stato nel local storage", err);
   }
 };
+
+// Funzione getter per la cache dei suggerimenti
+export const loadSuggestionCache = () => {
+  try {
+    const serializedCache = localStorage.getItem('pokemonSuggestionCache');
+    if (serializedCache === null) {
+      return {}; // Se non c'è cache salvata, ritorna un oggetto vuoto
+    }
+    return JSON.parse(serializedCache);
+  } catch (err) {
+    console.error("Errore nel caricamento della cache dei suggerimenti dal local storage", err);
+    return {};
+  }
+};
+
+// Funzione setter per salvare la cache dei suggerimenti
+export const saveSuggestionCache = (cache: any) => {
+  try {
+    const serializedCache = JSON.stringify(cache);
+    localStorage.setItem('pokemonSuggestionCache', serializedCache);
+  } catch (err) {
+    console.error("Impossibile salvare la cache dei suggerimenti nel local storage", err);
+  }
+};
