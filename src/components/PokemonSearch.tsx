@@ -3,6 +3,30 @@ import { useDispatch } from 'react-redux';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
 import { setCurrentPokemon, resetPokemon } from '../redux/pokemonSlice'; // Importa l'azione
 import { loadSuggestionCache, saveSuggestionCache } from '../redux/localStorage'; // Importa le funzioni del localStorage
+import styled from 'styled-components'; // Importa styled-components
+
+
+const SuggestionList = styled.ul`
+  background-color: rgba(255, 255, 255, 0.8); /* Colore di sfondo semitrasparente */
+  position: absolute; /* Posizione assoluta per sovrapporre l'input */
+  z-index: 1;
+  width: 100%;
+  max-width: 199px;
+`;
+
+const InputSearch = styled.input`
+  width: 100%;
+  max-width: 200px;
+`;
+
+const SuggestionItem = styled.li`
+  padding: 2px 0;
+  padding-left: 0.5rem;
+  cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.1); /* Colore di sfondo al passaggio del mouse */
+  }
+`;
 
 const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
@@ -103,13 +127,23 @@ const PokemonSearch = () => {
 
   return (
     <>
-      <input
+      <InputSearch
         type="search"
         placeholder="Cerca un pokemon"
         value={pokemonName}
         onChange={handleChange} // Cambia da onChange a handleChange
         onKeyDown={handleKeyDown}
       />
+      {/* Mostra i suggerimenti */}
+      {suggestions.length > 0 && (
+        <SuggestionList>
+          {suggestions.map((suggestion) => (
+            <SuggestionItem key={suggestion.name} onClick={() => handleSuggestionClick(suggestion.name)}>
+              {suggestion.name}
+            </SuggestionItem>
+          ))}
+        </SuggestionList>
+        )}      
       <button type="button" onClick={handleSearch}>
         <i className="fa-solid fa-magnifying-glass"></i>
         Cerca
@@ -117,16 +151,6 @@ const PokemonSearch = () => {
       <button type="submit">CATCH!</button>
       <button type="button" onClick={handleReset}>RESET</button>
 
-      {/* Mostra i suggerimenti */}
-      {suggestions.length > 0 && (
-        <ul>
-          {suggestions.map((suggestion) => (
-            <li key={suggestion.name} onClick={() => handleSuggestionClick(suggestion.name)}>
-              {suggestion.name}
-            </li>
-          ))}
-        </ul>
-      )}      
     </>
   );
 };
