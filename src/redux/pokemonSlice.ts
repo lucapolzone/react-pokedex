@@ -41,12 +41,16 @@ const pokemonSlice = createSlice({
     setCurrentPokemon: (state, action: PayloadAction<any>) => {
       state.currentPokemon = action.payload; 
     },
+
+    resetPokemon: (state) => {
+      state.currentPokemon = null; // azzera lo stato
+    },
   },
 });
 
 // createSlice crea le azioni con lo stesso nome dei reducer. 
 //Estraggo le azioni catchPokemon e deletePokemon dall'oggetto pokemonSlice.actions.
-export const { catchPokemon, deletePokemon, setCurrentPokemon } = pokemonSlice.actions;
+export const { catchPokemon, deletePokemon, setCurrentPokemon, resetPokemon } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
 

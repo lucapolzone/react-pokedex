@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
-import { setCurrentPokemon } from '../redux/pokemonSlice'; // Importa l'azione
+import { setCurrentPokemon, resetPokemon } from '../redux/pokemonSlice'; // Importa l'azione
 
 const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
@@ -57,6 +57,12 @@ const PokemonSearch = () => {
     setSuggestions([]); // Nascondi i suggerimenti dopo la selezione
   };
 
+  const handleReset = () => {
+    setPokemonName(''); // svuota l'input search
+    setSuggestions([]); // svuota i suggerimenti
+    dispatch(resetPokemon()); // resetta lo stato globale di Redux
+  };
+
   useEffect(() => {
     // Cleanup al momento della dismounting
     return () => {
@@ -80,6 +86,7 @@ const PokemonSearch = () => {
         Cerca
       </button>
       <button type="submit">CATCH!</button>
+      <button type="button" onClick={handleReset}>RESET</button>
 
       {/* Mostra i suggerimenti */}
       {suggestions.length > 0 && (
