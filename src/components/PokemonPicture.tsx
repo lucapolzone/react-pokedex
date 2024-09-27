@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const PokemonPictureWrapper = styled.div`
   margin: var(--medium-size) 0;
+  margin-top: var(--small-size);
   display: flex;
   justify-content: center;
   border: 5px solid salmon;

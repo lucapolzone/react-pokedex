@@ -28,10 +28,22 @@ const SuggestionItem = styled.li`
   }
 `;
 
+const WarningWrapper = styled.div`
+  height: 30px;
+  border: 1px solid rgb(170, 0, 0);
+`;
+
+const AlreadyCaughtMessage = styled.small`
+  display: inline-block;
+  color: yellow;
+  padding-top: 0.5rem;
+`;
+
 const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
   const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
+  const [showWarning, setShowWarning] = useState(false); // Nuovo stato per visualizzare o nascondere il messaggio
   
   // suggestionCache è l'oggetto che salva le ricerche in cache
   const [suggestionCache, setSuggestionCache] = useState<{ [key: string]: any[] }>({}); 
@@ -39,6 +51,7 @@ const PokemonSearch = () => {
   const dispatch = useDispatch(); // hook di redux
 
   const currentPokemon = useSelector((state: RootState) => state.pokemon.currentPokemon); // Accedi al pokemon attualmente visualizzato
+  const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); // Accedi ai pokemon catturati
 
   useEffect(() => {
     // al montaggio del componente carica la cache dei suggerimenti dal local storage
@@ -46,14 +59,14 @@ const PokemonSearch = () => {
     setSuggestionCache(cachedSuggestions);
   }, []);
 
-  // Funzione per effettuare la ricerca di un Pokémon
+  // Funzione per effettuare la ricerca di un pokemon
   const handleSearch = async () => {
     if (pokemonName.trim() === '') return;
     try {
       const result = await fetchPokemon(pokemonName);
       dispatch(setCurrentPokemon(result)); // salva i dati nel redux store
     } catch (error) {
-      console.error('Errore nella ricerca del Pokémon:', error);
+      console.error('Errore nella ricerca del pokemon:', error);
     }
   };
 
@@ -116,12 +129,23 @@ const PokemonSearch = () => {
     setPokemonName(''); // svuota l'input search
     setSuggestions([]); // svuota i suggerimenti
     dispatch(resetPokemon()); // resetta lo stato globale di Redux
+    setShowWarning(false); // Nascondi il messaggio di avviso al reset
   };
 
   // Funzione per catturare il pokemon corrente
   const handleCatch = () => {
     if (currentPokemon) {
-      dispatch(catchPokemon(currentPokemon.name)); // Usa il nome del pokemon corrente
+      if (caughtPokemons.includes(currentPokemon.name)) {
+        setShowWarning(true); // Mostra il messaggio se il pokemon è già stato catturato
+
+        // Nascondi il messaggio dopo 5 secondi
+        setTimeout(() => {
+          setShowWarning(false);
+        }, 5000);
+      } else {
+        dispatch(catchPokemon(currentPokemon.name)); // Usa il nome del pokemon corrente
+        setShowWarning(false); // Nascondi il messaggio se il pokemon viene catturato
+      }
     }
   };
 
@@ -159,7 +183,11 @@ const PokemonSearch = () => {
       </button>
       <button type="submit" onClick={handleCatch}>CATCH!</button>
       <button type="button" onClick={handleReset}>RESET</button>
-
+      
+      <WarningWrapper>
+        {/* Mostra il messaggio di avviso se il pokemon è già stato catturato */}
+        {showWarning && <AlreadyCaughtMessage>Hai già catturato questo pokemon!</AlreadyCaughtMessage>}
+      </WarningWrapper>
     </>
   );
 };
