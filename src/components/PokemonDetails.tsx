@@ -20,7 +20,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon }) => {
           <li><strong>Name: </strong>{pokemon.name}</li>
           <li><strong>Type: </strong>{pokemon.types.map((type: any) => type.type.name).join(', ')}</li>
           <li><strong>Height: </strong>{pokemon.height}</li>
-          <li><strong>Weight: </strong>{pokemon.weight}</li>
+          <li><strong>Weight: </strong>{pokemon.weight} lbs</li>
           <br />
           <li><strong>Stats</strong></li>
           {/* Passo le statistiche al componente PokemonStats */}

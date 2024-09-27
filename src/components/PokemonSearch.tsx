@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchPokemon, fetchPokemonSuggestions } from '../api/fetchPokemon';
-import { setCurrentPokemon, resetPokemon } from '../redux/pokemonSlice'; // Importa l'azione
+import { setCurrentPokemon, resetPokemon, catchPokemon } from '../redux/pokemonSlice'; // Importa l'azione
 import { loadSuggestionCache, saveSuggestionCache } from '../redux/localStorage'; // Importa le funzioni del localStorage
-import styled from 'styled-components'; // Importa styled-components
-
+import styled from 'styled-components'; // importa styled-components
+import { RootState } from '../redux/store'; // importa RootState per accedere allo stato globale
 
 const SuggestionList = styled.ul`
   background-color: rgba(255, 255, 255, 0.8);
@@ -24,7 +24,7 @@ const SuggestionItem = styled.li`
   padding-left: 0.5rem;
   cursor: pointer; 
   &:hover {
-    background-color: rgba(255, 0, 0, 0.1); 
+    background-color: rgba(255, 255, 0, 0.4); 
   }
 `;
 
@@ -37,6 +37,8 @@ const PokemonSearch = () => {
   const [suggestionCache, setSuggestionCache] = useState<{ [key: string]: any[] }>({}); 
   
   const dispatch = useDispatch(); // hook di redux
+
+  const currentPokemon = useSelector((state: RootState) => state.pokemon.currentPokemon); // Accedi al pokemon attualmente visualizzato
 
   useEffect(() => {
     // al montaggio del componente carica la cache dei suggerimenti dal local storage
@@ -64,7 +66,7 @@ const PokemonSearch = () => {
 
   // Funzione per gestire i cambiamenti dell'input e il debounce
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
+    const value = event.target.value.trim().toLowerCase();
     setPokemonName(value);
 
     if (debounceTimeout) {
@@ -116,6 +118,13 @@ const PokemonSearch = () => {
     dispatch(resetPokemon()); // resetta lo stato globale di Redux
   };
 
+  // Funzione per catturare il pokemon corrente
+  const handleCatch = () => {
+    if (currentPokemon) {
+      dispatch(catchPokemon(currentPokemon.name)); // Usa il nome del pokemon corrente
+    }
+  };
+
   useEffect(() => {
     // Cleanup al momento della dismounting
     return () => {
@@ -148,7 +157,7 @@ const PokemonSearch = () => {
         <i className="fa-solid fa-magnifying-glass"></i>
         Cerca
       </button>
-      <button type="submit">CATCH!</button>
+      <button type="submit" onClick={handleCatch}>CATCH!</button>
       <button type="button" onClick={handleReset}>RESET</button>
 
     </>
