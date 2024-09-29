@@ -19,6 +19,7 @@ const PokemonPictureWrapper = styled.div`
 const PokemonSprite = styled.img`
   display: block;
   max-width: 200px;
+  height: 100%;
 `;
 
 
