@@ -5,6 +5,7 @@ import PokemonPicture from './components/PokemonPicture';
 import PokemonDetails from './components/PokemonDetails';
 import { useSelector } from 'react-redux'; // per accedere allo stato di redux
 import { RootState } from './redux/store'; // per ottenere il tipo dello stato globale
+import { useState } from 'react';
 
 import './App.css';
 
@@ -41,14 +42,14 @@ const RightContainer = styled(BaseContainer)`
 
 
 // gestisce entrambi i componenti che dipendono dallo stesso stato
-const ReduxSyncWrapper = () => {
+const ReduxSyncWrapper = ({ notFound }: { notFound: boolean }) => {
   // Uso di useSelector per estrarre lo stato attuale del Pokémon da Redux
   const pokemon = useSelector((state: RootState) => state.pokemon.currentPokemon);
 
   return (
     <>
       {/* passa lo stato a entrambi i componenti */}
-      <PokemonPicture image={pokemon ? pokemon.sprites.front_default : null} />
+      <PokemonPicture image={pokemon ? pokemon.sprites.front_default : null} notFound={notFound} />
       <PokemonDetails pokemon={pokemon} />
     </>
   );
@@ -56,14 +57,16 @@ const ReduxSyncWrapper = () => {
 
 
 function App() {
+  const [notFound, setNotFound] = useState(false);  // stato per gestire se il pokemon non è stato trovato
+
   return (
     <>
       <Wrapper>
         <h1>Pokedex</h1>
         <Main>
           <LeftContainer>
-            <PokemonSearch />
-            <ReduxSyncWrapper />
+            <PokemonSearch setNotFound={setNotFound} />
+            <ReduxSyncWrapper notFound={notFound} />
           </LeftContainer>
           <RightContainer>
             <CaughtPokemonList />

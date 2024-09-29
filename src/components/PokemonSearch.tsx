@@ -39,7 +39,11 @@ const AlreadyCaughtMessage = styled.small`
   padding-top: 0.5rem;
 `;
 
-const PokemonSearch = () => {
+interface PokemonSearchProps {
+  setNotFound: (notFound: boolean) => void;  // aggiungo una prop per gestire lo stato di 'not found'
+}
+
+const PokemonSearch: React.FC<PokemonSearchProps> = ({ setNotFound }) => {
   const [pokemonName, setPokemonName] = useState('');
   const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
@@ -65,8 +69,11 @@ const PokemonSearch = () => {
     try {
       const result = await fetchPokemon(pokemonName);
       dispatch(setCurrentPokemon(result)); // salva i dati nel redux store
+      setNotFound(false);  // pokemon trovato
     } catch (error) {
       console.error('Errore nella ricerca del pokemon:', error);
+      dispatch(setCurrentPokemon(null));  // Resetta il pokemon corrente se non viene trovato
+      setNotFound(true); // pokemon trovato
     }
   };
 
@@ -129,7 +136,8 @@ const PokemonSearch = () => {
     setPokemonName(''); // svuota l'input search
     setSuggestions([]); // svuota i suggerimenti
     dispatch(resetPokemon()); // resetta lo stato globale di Redux
-    setShowWarning(false); // Nascondi il messaggio di avviso al reset
+    setShowWarning(false); // Nascondoil messaggio di avviso al reset
+    setNotFound(false);  // Resetta lo stato di 'not found' al reset
   };
 
   // Funzione per catturare il pokemon corrente
