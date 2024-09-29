@@ -10,7 +10,7 @@ export interface PokemonState {
 }
 
 const initialState: PokemonState = { // sintassi typescript: costante initialState, tipo PokemonState
-  caughtPokemons: ['Pikachu', 'Charmander', 'Bulbasaur', 'Spearow', 'Rattata', 'Squirtle', 'Ekans', ], // pokemon iniziali catturati
+  caughtPokemons: [], // pokemon iniziali catturati
   currentPokemon: null, // inizialmente nessun pokemon selezionato
 
 };
