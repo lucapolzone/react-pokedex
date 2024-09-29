@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux'; //hooks di redux con react. useSelector: accede allo stato del Redux store. useDispatch: fornisce una funzione che invia actions allo store.
 import { RootState } from '../redux/store';
-import { deletePokemon } from '../redux/pokemonSlice';
-// import { pokemonSlice } from '../redux/pokemonSlice';
+import { deletePokemon, clearCaughtPokemons } from '../redux/pokemonSlice';
+import { saveState } from '../redux/localStorage';
 
 
 const List = styled.div`
@@ -22,6 +22,17 @@ const Li = styled.li`
 `;
 
 const PokemonName = styled.small``;
+
+const TopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between; 
+`;
+
+
+const ButtonResetList = styled.button`
+  padding: 0.4rem;
+  font-size: 1rem;
+`;
 
 const Controllers = styled.div`
   .fa-eye {
@@ -45,9 +56,19 @@ const CaughtPokemonList = () => {
 
   // console.log("Redux actions:",pokemonSlice.actions);
 
+  const handleClearList = () => {
+    dispatch(clearCaughtPokemons());  // Dispatch dell'azione per svuotare la lista
+    saveState({ pokemon: { caughtPokemons: [], currentPokemon: null } });  
+  };
+
   return (
     <List>
-      <h2>Pokemon catturati</h2>
+      <TopWrapper>
+        <h2>Pokemon catturati</h2>
+        <ButtonResetList onClick={handleClearList}>
+          <i className="fa-solid fa-trash-can"></i><small>&nbsp; Svuota lista</small>
+          </ButtonResetList>
+      </TopWrapper>
       <Ul>
       {caughtPokemons.map((pokemon) => (
         <Li key={pokemon}>

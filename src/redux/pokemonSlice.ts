@@ -45,12 +45,17 @@ const pokemonSlice = createSlice({
     resetPokemon: (state) => {
       state.currentPokemon = null; // azzera lo stato
     },
+    
+    // Azione per svuotare la lista
+    clearCaughtPokemons: (state) => {
+      state.caughtPokemons = [];  
+    },
   },
 });
 
 // createSlice crea le azioni con lo stesso nome dei reducer. 
-//Estraggo le azioni catchPokemon e deletePokemon dall'oggetto pokemonSlice.actions.
-export const { catchPokemon, deletePokemon, setCurrentPokemon, resetPokemon } = pokemonSlice.actions;
+//Estraggo le azioni dall'oggetto pokemonSlice.actions.
+export const { catchPokemon, deletePokemon, setCurrentPokemon, resetPokemon, clearCaughtPokemons } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
 
