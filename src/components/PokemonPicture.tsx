@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 const PokemonPictureWrapper = styled.div`
   margin: var(--medium-size) 0;
@@ -25,11 +26,26 @@ const PokemonSprite = styled.img`
 
 // interfaccia corretta per la prop image
 interface PokemonPictureProps {
-  image: string | null; // tipo della prop 'image'
+  frontImage: string | null; // prop per l'immagine frontale
+  backImage: string | null;  // prop per l'immagine posteriore
   notFound: boolean;  // aggiungo una prop per gestire se il pokemon non è stato trovato
 }
 
-const PokemonPicture: React.FC<PokemonPictureProps> = ({ image, notFound }) => {
+const PokemonPicture: React.FC<PokemonPictureProps> = ({ frontImage, backImage, notFound }) => {
+  const [image, setImage] = useState<string | null>(frontImage); // Stato per l'immagine corrente
+
+  useEffect(() => {
+    setImage(frontImage); // Imposta l'immagine frontale immediatamente
+   
+    if (frontImage && backImage) {
+      const interval = setInterval(() => {
+        setImage(prevImage => (prevImage === frontImage ? backImage : frontImage));
+      }, 2000); // cambia immagine ogni 2 secondi
+
+      return () => clearInterval(interval); // cleanup per evitare memory leaks
+    }
+  }, [frontImage, backImage]); // esegui quando cambia frontImage o backImage
+
 
   return (
     <PokemonPictureWrapper>

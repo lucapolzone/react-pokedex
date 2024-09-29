@@ -49,7 +49,11 @@ const ReduxSyncWrapper = ({ notFound }: { notFound: boolean }) => {
   return (
     <>
       {/* passa lo stato a entrambi i componenti */}
-      <PokemonPicture image={pokemon ? pokemon.sprites.front_default : null} notFound={notFound} />
+      <PokemonPicture 
+        frontImage={pokemon ? pokemon.sprites.front_default : null} 
+        backImage={pokemon ? pokemon.sprites.back_default : null} 
+        notFound={notFound} 
+      />
       <PokemonDetails pokemon={pokemon} />
     </>
   );
