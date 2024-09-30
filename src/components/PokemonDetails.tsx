@@ -7,9 +7,15 @@ const DetailList = styled.ul`
   min-height: 242px;
 `;
 
-// interfaccia corretta per la prop 'pokemon'
+// interfaccia per la prop 'pokemon'
 interface PokemonDetailsProps {
-  pokemon: any; // da tipizzare meglio
+  pokemon: {
+    name: string;
+    types: { type: { name: string } }[]; // array di tipi di pokemon
+    height: number;
+    weight: number;
+    stats: { base_stat: number; stat: { name: string } }[]; // array di statistiche
+  };
 }
 
 const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon }) => {
