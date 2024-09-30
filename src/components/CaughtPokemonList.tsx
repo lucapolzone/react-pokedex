@@ -14,6 +14,8 @@ Modal.setAppElement('#root');
 const List = styled.div`
   padding: 2rem;
   background-color: white;
+  max-height: 535px;
+  overflow-y: auto;
 `;
 
 const Ul = styled.ul`
