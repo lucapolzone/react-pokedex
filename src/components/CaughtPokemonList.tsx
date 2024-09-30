@@ -73,7 +73,6 @@ const CaughtPokemonList = () => {
   };
 
   const openModal = async (pokemonName: string) => {
-    // Esegui una chiamata API per ottenere i dettagli del Pokémon
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
     const data = await res.json();
     setSelectedPokemon(data);  // Imposta i dettagli del pokemon selezionato
@@ -88,7 +87,7 @@ const CaughtPokemonList = () => {
   // Stili per la modale
   const modalStyle = {
     content: {
-      width: '400px',
+      width: '450px',
       margin: 'auto',
       padding: '1rem',
       borderRadius: '10px',
@@ -121,17 +120,16 @@ const CaughtPokemonList = () => {
 
       {/* Modale dettagli del pokemon */}
       <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={modalStyle}>
-        {selectedPokemon ? (
+        {selectedPokemon && (
           <>
             <img
               src={selectedPokemon.sprites.front_default}
               alt={selectedPokemon.name}
             />
-            <PokemonDetails pokemon={selectedPokemon}/>
+            {/* Viene passato il colore di background come prop */}
+            <PokemonDetails pokemon={selectedPokemon} backgroundColor="#fff" />
           </>
-        ) : (
-          <p>Caricamento...</p>
-        )}
+        )} 
         <button onClick={closeModal}>Chiudi</button>
       </Modal>
     </List>

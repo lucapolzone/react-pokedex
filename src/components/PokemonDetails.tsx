@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import PokemonStats from './PokemonStats';
 
-const DetailList = styled.ul`
+const DetailList = styled.ul<{ $backgroundColor?: string }>`
   padding: var(--small-size);
-  background-color: rgb(184, 184, 184);
+  background-color: ${(props) => props.$backgroundColor || 'rgb(184, 184, 184)'}; /* usa la prop o un valore di default */
+  /*$backgroundColor col dollaro perché è una transient props* /
   min-height: 242px;
 `;
 
@@ -16,11 +17,12 @@ interface PokemonDetailsProps {
     weight: number;
     stats: { base_stat: number; stat: { name: string } }[]; // array di statistiche
   };
+  backgroundColor?: string; // background color prop
 }
 
-const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon }) => {
+const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, backgroundColor }) => {
   return (
-    <DetailList>
+    <DetailList $backgroundColor={backgroundColor}>
       {pokemon && pokemon.name ? (
         <>
           <li><strong>Name: </strong>{pokemon.name}</li>
