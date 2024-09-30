@@ -54,6 +54,22 @@ const Controllers = styled.div`
   }
 `;
 
+const ModalElWrapper = styled.div`
+  text-align: center;
+`;
+
+const ModalPokemonImg = styled.img`
+  width: 170px;
+`;
+
+const ModalButton = styled.button`
+  margin-top: var(--small-size);
+  background-color: blue;
+  color: #fff;
+  padding: 0.6rem;
+`;
+
+
 // Componente statico CaughtPokemonList
 const CaughtPokemonList = () => {
   const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //laa funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
@@ -88,6 +104,7 @@ const CaughtPokemonList = () => {
   const modalStyle = {
     content: {
       width: '450px',
+      height: 'fit-content',
       margin: 'auto',
       padding: '1rem',
       borderRadius: '10px',
@@ -122,15 +139,19 @@ const CaughtPokemonList = () => {
       <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={modalStyle}>
         {selectedPokemon && (
           <>
-            <img
+          <ModalElWrapper>
+            <ModalPokemonImg
               src={selectedPokemon.sprites.front_default}
               alt={selectedPokemon.name}
-            />
+              />
+          </ModalElWrapper>
             {/* Viene passato il colore di background come prop */}
             <PokemonDetails pokemon={selectedPokemon} backgroundColor="#fff" />
           </>
-        )} 
-        <button onClick={closeModal}>Chiudi</button>
+        )}
+        <ModalElWrapper>
+          <ModalButton onClick={closeModal}>Chiudi</ModalButton>
+        </ModalElWrapper>
       </Modal>
     </List>
   );
