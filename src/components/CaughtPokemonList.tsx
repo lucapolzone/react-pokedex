@@ -71,10 +71,36 @@ const ModalButton = styled.button`
   padding: 0.6rem;
 `;
 
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
+interface PokemonStat {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
+}
+
+// definisco l'interfaccia per il pokemon
+interface Pokemon {
+  name: string;
+  height: number;
+  weight: number;
+  sprites: {
+    front_default: string;
+  };
+  types: PokemonType[];
+  stats: PokemonStat[];
+}
+
+
 
 // Componente statico CaughtPokemonList
 const CaughtPokemonList = () => {
-  const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //laa funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
+  const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //la funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
   // console.log(caughtPokemons);
   
   const dispatch = useDispatch();
@@ -83,7 +109,7 @@ const CaughtPokemonList = () => {
 
   // Stato per gestire l'apertura della modale e il pokemon selezionato
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPokemon, setSelectedPokemon] = useState<any>(null);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   
   const handleClearList = () => {
     dispatch(clearCaughtPokemons());  // Dispatch dell'azione per svuotare la lista
