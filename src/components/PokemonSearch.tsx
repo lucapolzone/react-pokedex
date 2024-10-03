@@ -6,6 +6,13 @@ import { loadSuggestionCache, saveSuggestionCache } from '../redux/localStorage'
 import styled from 'styled-components'; // importa styled-components
 import { RootState } from '../redux/store'; // importa RootState per accedere allo stato globale
 
+
+// Interfaccia per un suggerimento di pokemon
+interface Suggestion {
+  name: string;
+}
+
+
 const SuggestionList = styled.ul`
   background-color: rgba(255, 255, 255, 0.8);
   position: absolute;
@@ -45,12 +52,12 @@ interface PokemonSearchProps {
 
 const PokemonSearch: React.FC<PokemonSearchProps> = ({ setNotFound }) => {
   const [pokemonName, setPokemonName] = useState('');
-  const [suggestions, setSuggestions] = useState<any[]>([]); // Stato per i suggerimenti
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]); // Stato per i suggerimenti
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // Stato per gestire il debounce
   const [showWarning, setShowWarning] = useState(false); // Nuovo stato per visualizzare o nascondere il messaggio
   
   // suggestionCache è l'oggetto che salva le ricerche in cache
-  const [suggestionCache, setSuggestionCache] = useState<{ [key: string]: any[] }>({}); 
+  const [suggestionCache, setSuggestionCache] = useState<{ [key: string]: Suggestion[] }>({}); 
   
   const dispatch = useDispatch(); // hook di redux
 
@@ -98,7 +105,8 @@ const PokemonSearch: React.FC<PokemonSearchProps> = ({ setNotFound }) => {
       if (value.length > 0) {
         // Controlla se il suggerimento esiste già nella cache
         if (suggestionCache[value]) {
-          console.table("Suggerimenti trovati in cache:", suggestionCache[value]);
+          const suggestionNames = suggestionCache[value].map(suggestion => suggestion.name);
+          console.log("Suggerimenti trovati in cache:", suggestionNames);
           setSuggestions(suggestionCache[value]); // Usa i suggerimenti dalla cache
         } else {
           try {
