@@ -24,13 +24,15 @@ const pokemonSlice = createSlice({
 
     //Azione per aggiungere un nuovo pokemon catturato
     //catchPokemon nome dell'azione
-    catchPokemon: (state, action: PayloadAction<string>) => { //PayloadAction è un tipo generico, PayloadAction<string> è un tipo specifico 
-      state.caughtPokemons.push(action.payload); //state arriva da createSlice
-    },
+      catchPokemon: (state: PokemonState, action: PayloadAction<string>) => { //PayloadAction è un tipo generico, PayloadAction<string> è un tipo specifico 
+        state.caughtPokemons.push(action.payload); //state arriva da createSlice
+        console.log(JSON.parse(JSON.stringify(state)));
+        // console.log(action);
+      },
 
     //Azione per rimuovere un pokemon dalla lista
     //deletePokemon nome dell'azione
-    deletePokemon: (state, action: PayloadAction<string>) => {
+    deletePokemon: (state: PokemonState, action: PayloadAction<string>) => {
       state.caughtPokemons = state.caughtPokemons.filter(
         (pokemon) => pokemon !== action.payload
       );
@@ -38,16 +40,16 @@ const pokemonSlice = createSlice({
     },
 
     // Imposta i dati del pokemon cercato
-    setCurrentPokemon: (state, action: PayloadAction<any>) => {
+    setCurrentPokemon: (state: PokemonState, action: PayloadAction<any>) => {
       state.currentPokemon = action.payload; 
     },
 
-    resetPokemon: (state) => {
+    resetPokemon: (state: PokemonState) => {
       state.currentPokemon = null; // azzera lo stato
     },
     
     // Azione per svuotare la lista
-    clearCaughtPokemons: (state) => {
+    clearCaughtPokemons: (state: PokemonState) => {
       state.caughtPokemons = [];  
     },
   },
