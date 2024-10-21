@@ -71,18 +71,7 @@ const ModalButton = styled.button`
   padding: 0.6rem;
 `;
 
-interface PokemonType {
-  type: {
-    name: string;
-  };
-}
 
-interface PokemonStat {
-  base_stat: number;
-  stat: {
-    name: string;
-  };
-}
 
 // definisco l'interfaccia per il pokemon
 interface Pokemon {
@@ -97,8 +86,21 @@ interface Pokemon {
 }
 
 
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
 
-// Componente statico CaughtPokemonList
+interface PokemonStat {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
+}
+
+
+// Componente statico CaughtPokemonList. Statico perché non dipende da props o state dinamici
 const CaughtPokemonList = () => {
   const caughtPokemons = useSelector((state: RootState) => state.pokemon.caughtPokemons); //la funzione prende state come argomento e restituisce state.pokemon.caughtPokemons.
   // console.log(caughtPokemons);
@@ -148,7 +150,7 @@ const CaughtPokemonList = () => {
       <TopWrapper>
         <h2>Pokemon catturati</h2>
         <ButtonResetList onClick={handleClearList}>
-          <i className="fa-solid fa-trash-can"></i><small>&nbsp; Svuota lista</small>
+          <small>Libera i Pokemon!</small>
           </ButtonResetList>
       </TopWrapper>
       <Ul>
