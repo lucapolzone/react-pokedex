@@ -8,11 +8,12 @@ import { RootState } from './redux/store'; // per ottenere il tipo dello stato g
 import { useState } from 'react';
 
 import './App.css';
-
+import { Container, Row, Col } from 'styled-bootstrap-grid';
 
 const Wrapper = styled.div`
   margin: var(--small-size);
 `;
+
 
 const Main = styled.main`
   margin: var(--small-size);
@@ -29,15 +30,17 @@ const BaseContainer = styled.div`
 `;
 
 const LeftContainer = styled(BaseContainer)`
+  width: 100%;
   border-right: 3px solid salmon;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-`;
-
-const RightContainer = styled(BaseContainer)`
+  // border-top-left-radius: 20px;
+  // border-bottom-left-radius: 20px;
+  `;
+  
+  const RightContainer = styled(BaseContainer)`
+  width: 100%;
   border-left: 3px solid salmon;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  // border-top-right-radius: 20px;
+  // border-bottom-right-radius: 20px;
 `;
 
 
@@ -53,7 +56,7 @@ const ReduxSyncWrapper = ({ notFound }: { notFound: boolean }) => {
         frontImage={pokemon ? pokemon.sprites.front_default : null} 
         backImage={pokemon ? pokemon.sprites.back_default : null} 
         notFound={notFound} 
-      />
+        />
       <PokemonDetails pokemon={pokemon} />
     </>
   );
@@ -68,13 +71,21 @@ function App() {
       <Wrapper>
         <h1>Pokedex</h1>
         <Main>
-          <LeftContainer>
-            <PokemonSearch setNotFound={setNotFound} />
-            <ReduxSyncWrapper notFound={notFound} />
-          </LeftContainer>
-          <RightContainer>
-            <CaughtPokemonList />
-          </RightContainer>
+        <Container>
+          <Row>
+            <Col col={12} md={6} style={{ paddingLeft: 0, paddingRight: 0, marginRight: 0 }}>
+              <LeftContainer>
+                <PokemonSearch setNotFound={setNotFound} />
+                <ReduxSyncWrapper notFound={notFound} />
+              </LeftContainer>
+            </Col>
+            <Col col={12} md={6} style={{ paddingLeft: 0, paddingRight: 0 }}>
+              <RightContainer>
+                <CaughtPokemonList />
+              </RightContainer>
+            </Col>
+          </Row>
+        </Container>
         </Main>
       </Wrapper>
     </>
