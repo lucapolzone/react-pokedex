@@ -38,6 +38,7 @@ const LeftContainer = styled(BaseContainer)`
   
   const RightContainer = styled(BaseContainer)`
   width: 100%;
+  height: 100%;
   border-left: 3px solid salmon;
   // border-top-right-radius: 20px;
   // border-bottom-right-radius: 20px;

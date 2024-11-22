@@ -5,6 +5,8 @@ const Stats = styled.ul``;
 
 const WrapperStatLi = styled.div`
   min-width: 70px;
+  width: 50%;
+  padding-right: 1.2rem;
 `;
 
 const StatsLi = styled.li`
@@ -18,7 +20,7 @@ const WrapperStat = styled.div`
   border: 1px solid blue;
   background-color: white; 
   width: 100%; 
-  max-width: 250px; 
+  max-width: 300px; 
   height: 12px;
 `;
 
