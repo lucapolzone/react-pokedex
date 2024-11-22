@@ -47,6 +47,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, backgroundColo
             name: stat.stat.name,  // Estraggo il nome della statistica
             base_stat: stat.base_stat // Estraggo il valore base
           }))} />
+
     </DetailList>
   );
 };

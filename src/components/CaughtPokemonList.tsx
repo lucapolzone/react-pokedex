@@ -49,7 +49,7 @@ const ButtonResetList = styled.button`
 const Controllers = styled.div`
   .fa-eye {
     color: blue;
-    margin-right: 8px;
+    margin-right: 1.5rem;
     cursor: pointer;
   }
 
