@@ -1,3 +1,15 @@
+import { PokemonState } from "./pokemonSlice"; 
+
+interface RootState {
+  pokemon: PokemonState;
+}
+
+interface SuggestionCache {
+  [key: string]: Array<{ name: string; url: string }>;
+}
+
+
+
 // Funzione getter: carica lo stato dal local storage
 export const loadState = () => {
   try {
@@ -13,7 +25,7 @@ export const loadState = () => {
 };
 
 // Funzione setter: salva lo stato nel local storage
-export const saveState = (state: any) => {
+export const saveState = (state: RootState) => {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('pokemonState', serializedState);
@@ -23,6 +35,7 @@ export const saveState = (state: any) => {
 };
 
 // Funzione getter per la cache dei suggerimenti
+// export const loadSuggestionCache = (): SuggestionCache => {
 export const loadSuggestionCache = () => {
   try {
     const serializedCache = localStorage.getItem('pokemonSuggestionCache');
@@ -37,7 +50,7 @@ export const loadSuggestionCache = () => {
 };
 
 // Funzione setter per salvare la cache dei suggerimenti
-export const saveSuggestionCache = (cache: any) => {
+export const saveSuggestionCache = (cache: SuggestionCache) => {
   try {
     const serializedCache = JSON.stringify(cache);
     localStorage.setItem('pokemonSuggestionCache', serializedCache);

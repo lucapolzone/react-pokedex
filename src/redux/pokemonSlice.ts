@@ -1,13 +1,14 @@
 // createSlice, crea uno slice ovvero una porzione dello stato con la sua logica di aggiornamento (azioni e reducer).
 //PayloadAction: è un tipo TypeScript di Redux che rappresenta un'azione in Redux con un payload (dati che passano con l'azione). È utile per tipizzare le azioni che modificano lo stato.
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Pokemon } from '../api/fetchPokemon';
 
 // interface: Una struttura in TypeScript per l'oggetto. Specifica le proprietà e i loro tipi.
 export interface PokemonState {
   caughtPokemons: string[]; // array di nomi di pokemon catturati
-  currentPokemon: any | null; // dati del pokemon cercato
-
+  currentPokemon: Pokemon | null; // dati del pokemon cercato
 }
+
 
 const initialState: PokemonState = { // sintassi typescript: costante initialState, tipo PokemonState
   caughtPokemons: [], // pokemon iniziali catturati
@@ -40,20 +41,23 @@ const pokemonSlice = createSlice({
     },
 
     // Imposta i dati del pokemon cercato
-    setCurrentPokemon: (state: PokemonState, action: PayloadAction<any>) => {
+    setCurrentPokemon: (state: PokemonState, action: PayloadAction<Pokemon | null>) => {
       state.currentPokemon = action.payload; 
     },
 
     resetPokemon: (state: PokemonState) => {
-      state.currentPokemon = null; // azzera lo stato
+      state.currentPokemon = null; // azzera currentPokemon
     },
     
-    // Azione per svuotare la lista
+    // azione per svuotare la lista
     clearCaughtPokemons: (state: PokemonState) => {
       state.caughtPokemons = [];  
     },
   },
 });
+
+// console.log(pokemonSlice);
+// console.log(pokemonSlice.reducer);
 
 // createSlice crea le azioni con lo stesso nome dei reducer. 
 //Estraggo le azioni dall'oggetto pokemonSlice.actions.

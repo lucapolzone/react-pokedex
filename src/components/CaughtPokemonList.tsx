@@ -8,6 +8,9 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import PokemonDetails from './PokemonDetails';
 
+import { Pokemon } from '../api/fetchPokemon';
+
+
 // Assegno la modale all'elemento #root
 Modal.setAppElement('#root');
 
@@ -70,34 +73,6 @@ const ModalButton = styled.button`
   color: #fff;
   padding: 0.6rem;
 `;
-
-
-
-// definisco l'interfaccia per il pokemon
-interface Pokemon {
-  name: string;
-  height: number;
-  weight: number;
-  sprites: {
-    front_default: string;
-  };
-  types: PokemonType[];
-  stats: PokemonStat[];
-}
-
-
-interface PokemonType {
-  type: {
-    name: string;
-  };
-}
-
-interface PokemonStat {
-  base_stat: number;
-  stat: {
-    name: string;
-  };
-}
 
 
 // Componente statico CaughtPokemonList. Statico perché non dipende da props o state dinamici

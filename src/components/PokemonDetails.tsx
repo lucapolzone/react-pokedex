@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PokemonStats from './PokemonStats';
+import { Pokemon } from '../api/fetchPokemon';
 
 const DetailList = styled.ul<{ $backgroundColor?: string }>`
   padding: var(--small-size);
@@ -16,31 +17,25 @@ interface PokemonType {
 }
 
 
-interface PokemonStat {
-  base_stat: number;
-  stat: {
-    name: string;
-  };
-}
-
-
 // interfaccia per la prop 'pokemon'
 interface PokemonDetailsProps {
-  pokemon: {
-    name: string;
-    types: PokemonType[]; // Usa l'interfaccia PokemonType
-    height: number;
-    weight: number;
-    stats: PokemonStat[];
-  };
+  pokemon: Pokemon | null;
   backgroundColor?: string; // background color prop
 }
 
 const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, backgroundColor }) => {
+
+  // Controllo se il Pokémon è null
+  if (!pokemon) {
+    return (
+      <DetailList $backgroundColor={backgroundColor}>
+        <p>Seleziona un Pokémon per vedere i dettagli</p>
+      </DetailList>
+    );
+  }
+
   return (
     <DetailList $backgroundColor={backgroundColor}>
-      {pokemon && pokemon.name ? (
-        <>
           <li><strong>Name: </strong>{pokemon.name}</li>
           <li><strong>Type: </strong>{pokemon.types.map((type: PokemonType) => type.type.name).join(', ')}</li>
           <li><strong>Height: </strong>{pokemon.height}</li>
@@ -52,10 +47,6 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, backgroundColo
             name: stat.stat.name,  // Estraggo il nome della statistica
             base_stat: stat.base_stat // Estraggo il valore base
           }))} />
-        </>
-      ) : (
-        <p>&nbsp;</p>
-      )}
     </DetailList>
   );
 };
