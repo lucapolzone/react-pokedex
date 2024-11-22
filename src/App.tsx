@@ -11,7 +11,7 @@ import './App.css';
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 
 const Wrapper = styled.div`
-  margin: var(--small-size);
+  margin-top: var(--small-size);
 `;
 
 
