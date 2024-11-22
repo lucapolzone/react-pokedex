@@ -108,7 +108,8 @@ const CaughtPokemonList = () => {
   // Stili per la modale
   const modalStyle = {
     content: {
-      width: '450px',
+      // width: '100%',
+      maxWidth: '450px',
       height: 'fit-content',
       margin: 'auto',
       padding: '1rem',

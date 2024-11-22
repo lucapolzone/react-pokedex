@@ -3,15 +3,22 @@ import styled from 'styled-components';
 // wrapper per il contenitore delle statistiche
 const Stats = styled.ul``;
 
+const WrapperStatLi = styled.div`
+  min-width: 70px;
+`;
+
 const StatsLi = styled.li`
   display: flex;
   justify-content: space-between;
+  margin: 5px 0;
+  align-items: center;
 `;
 
 const WrapperStat = styled.div`
   border: 1px solid blue;
   background-color: white; 
-  width: 250px; 
+  width: 100%; 
+  max-width: 250px; 
   height: 12px;
 `;
 
@@ -31,10 +38,12 @@ const MAX_STAT_VALUE = 255; // Valore massimo per una statistica
 
 const PokemonStats: React.FC<PokemonStatsProps> = ({ stats }) => {
   return (
-    <Stats>
+    <Stats >
       {stats.map((stat) => (
         <StatsLi key={stat.name}>
-          <small>{stat.name}</small>
+          <WrapperStatLi>
+            <small>{stat.name}</small>
+          </WrapperStatLi>
           <WrapperStat>
             <Stat width={(stat.base_stat / MAX_STAT_VALUE) * 125} /> {/* Calcola la larghezza in base alla percentuale */}
           </WrapperStat>
