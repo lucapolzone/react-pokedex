@@ -70,7 +70,7 @@ function App() {
   return (
     <>
       <Wrapper>
-        <h1>Pokedex</h1>
+        <h1>React Pokedex</h1>
         <Main>
         <Container>
           <Row>
