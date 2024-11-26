@@ -34,7 +34,17 @@ const LeftContainer = styled(BaseContainer)`
   border-right: 3px solid salmon;
   // border-top-left-radius: 20px;
   // border-bottom-left-radius: 20px;
-  `;
+
+  @media screen and (max-width: 480px) { 
+    button {
+      margin-top: 1rem;
+    }
+    
+    button:first-of-type {
+      margin-left: 0;
+    }
+  }
+`;
   
   const RightContainer = styled(BaseContainer)`
   width: 100%;
